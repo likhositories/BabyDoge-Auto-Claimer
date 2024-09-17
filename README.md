@@ -20,8 +20,8 @@ Join BabyDoge: [Start Earning Now!](https://t.me/BabyDogePAWS_Bot/game?startapp=
 
 Join our Telegram groups for support, updates, and discussions:
 
-- [Airdrop Channel](https://t.me/rexxcheat)
-- [Support Group](https://t.me/rexxcheat_chat)
+- [Airdrop Channel](https://t.me/RexxCheat)
+- [Support Group](https://t.me/RexxLounge)
 
 Need a VPS? DM us for special offers!
 
