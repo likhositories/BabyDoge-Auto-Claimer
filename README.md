@@ -2,8 +2,8 @@
 
 Automate your BabyDoge earnings with this powerful and feature-rich bot!
 
-[![GitHub stars](https://img.shields.io/github/stars/likhositories/BabyDoge-Auto-Claim-Bot.svg?style=social&label=Star)](https://github.com/likhositories/BabyDoge-Auto-Claim-Bot)
-[![GitHub forks](https://img.shields.io/github/forks/likhositories/BabyDoge-Auto-Claim-Bot.svg?style=social&label=Fork)](https://github.com/likhositories/BabyDoge-Auto-Claim-Bot)
+[![GitHub stars](https://img.shields.io/github/stars/likhositories/BabyDoge-Auto-Claimer.svg?style=social&label=Star)](https://github.com/likhositories/BabyDoge-Auto-Claimer)
+[![GitHub forks](https://img.shields.io/github/forks/likhositories/BabyDoge-Auto-Claimer.svg?style=social&label=Fork)](https://github.com/likhositories/BabyDoge-Auto-Claimer)
 
 ## 🚀 Quick Start
 
