@@ -1,0 +1,74 @@
+name: Generate Contribution Snake Animation
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # Run weekly on Sundays at 00:00 UTC
+  workflow_dispatch:  # Allow manual trigger
+  push:
+    branches:
+      - master
+    paths:
+      - '**/*.js'  # Only run on JavaScript file changes
+
+jobs:
+  generate:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 365  # Fetch last year's history
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      
+      - name: Generate contribution snake animation
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+      
+      - name: Validate SVG files
+        run: |
+          sudo apt-get update && sudo apt-get install -y libxml2-utils
+          xmllint --noout dist/*.svg
+      
+      - name: Push generated files to output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "chore: update contribution snake animation"
+          author_name: GitHub Actions Bot
+          author_email: actions@github.com
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Run security scan
+        uses: github/codeql-action/analyze@v2
+        with:
+          languages: javascript
+      
+      - name: Check for rate limit
+        run: |
+          remaining=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit | jq .rate.remaining)
+          if [ $remaining -lt 1000 ]; then
+            echo "Rate limit is getting low. Current remaining calls: $remaining"
+            exit 1
+          fi
